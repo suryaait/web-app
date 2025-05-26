@@ -1,13 +1,4 @@
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Button,
-  TextField,
-  Grid,
-  Avatar,
-} from "@mui/material";
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, Grid, Avatar } from "@mui/material";
 import type { ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
 import { editProduct } from "../../redux/slice/productSlice";
@@ -34,15 +25,7 @@ interface EditProductDialogProps {
   onSubmit: () => void;
 }
 
-const EditProductDialog: React.FC<EditProductDialogProps> = ({
-  open,
-  selectedProductId,
-  editedProduct,
-  selectedImages,
-  onClose,
-  onInputChange,
-  onImageChange,
-}) => {
+const EditProductDialog: React.FC<EditProductDialogProps> = ({ open, selectedProductId, editedProduct, selectedImages, onClose, onInputChange, onImageChange }) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const handleSubmit = async () => {
