@@ -1,36 +1,10 @@
 import { useEffect, useState, type ChangeEvent } from "react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-  Typography,
-  Avatar,
-  IconButton,
-  Button,
-  Grid,
-  TextField,
-  MenuItem,
-  Box,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-} from "@mui/material";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, Avatar, IconButton, Button, Grid, TextField, MenuItem, Box, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 import { Edit, Delete } from "@mui/icons-material";
 import AddProductDialog from "./addProductDialog";
 import EditProductDialog from "./editProductDialog";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchAllProducts,
-  fetchFilteredProducts,
-  removeProduct,
-  editProduct,
-  addProduct,
-} from "../../redux/slice/productSlice";
+import { fetchAllProducts,fetchFilteredProducts, removeProduct, editProduct, addProduct } from "../../redux/slice/productSlice";
 import type { AppDispatch, RootState } from "../../redux/store/store";
 
 interface Product {
@@ -52,7 +26,6 @@ interface EditedProduct {
 export default function ProductTable() {
   const dispatch = useDispatch<AppDispatch>();
   const { products } = useSelector((state: RootState) => state.products);
-
   const [open, setOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [editedProduct, setEditedProduct] = useState<EditedProduct>({});
@@ -221,27 +194,13 @@ export default function ProductTable() {
         <Table>
           <TableHead sx={{ backgroundColor: "#f0f0f0" }}>
             <TableRow>
-              <TableCell>
-                <strong>Images</strong>
-              </TableCell>
-              <TableCell>
-                <strong>Name</strong>
-              </TableCell>
-              <TableCell>
-                <strong>Description</strong>
-              </TableCell>
-              <TableCell>
-                <strong>Price (₹)</strong>
-              </TableCell>
-              <TableCell>
-                <strong>Stock</strong>
-              </TableCell>
-              <TableCell>
-                <strong>Created At</strong>
-              </TableCell>
-              <TableCell>
-                <strong>Actions</strong>
-              </TableCell>
+              <TableCell> <strong>Images</strong> </TableCell>
+              <TableCell> <strong>Name</strong> </TableCell>
+              <TableCell> <strong>Description</strong> </TableCell>
+              <TableCell> <strong>Price (₹)</strong> </TableCell>
+              <TableCell> <strong>Stock</strong> </TableCell>
+              <TableCell> <strong>Created At</strong> </TableCell>
+              <TableCell> <strong>Actions</strong> </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -256,12 +215,7 @@ export default function ProductTable() {
                 <TableCell>
                   <Box component="div" sx={{ display: "flex", gap: 1 }}>
                     {(product.imageUrls ?? []).map((url: string) => (
-                      <Avatar
-                        key={url}
-                        src={`http://localhost:3000${url}`}
-                        variant="rounded"
-                        sx={{ width: 56, height: 56 }}
-                      />
+                      <Avatar key={url} src={`http://localhost:3000${url}`} variant="rounded" sx={{ width: 56, height: 56 }} />
                     ))}
                   </Box>
                 </TableCell>
@@ -269,22 +223,13 @@ export default function ProductTable() {
                 <TableCell>{product.description}</TableCell>
                 <TableCell>₹{product.price}</TableCell>
                 <TableCell>{product.stock}</TableCell>
-                <TableCell>
-                  {product.createdAt
-                    ? new Date(product.createdAt).toLocaleString()
-                    : "N/A"}
+                <TableCell> {product.createdAt ? new Date(product.createdAt).toLocaleString() : "N/A"}
                 </TableCell>
                 <TableCell>
-                  <IconButton
-                    color="primary"
-                    onClick={() => handleEditClick(product)}
-                  >
+                  <IconButton color="primary" onClick={() => handleEditClick(product)}>
                     <Edit />
                   </IconButton>
-                  <IconButton
-                    color="error"
-                    onClick={() => handleDeleteClick(product._id)}
-                  >
+                  <IconButton color="error" onClick={() => handleDeleteClick(product._id)}>
                     <Delete />
                   </IconButton>
                 </TableCell>
@@ -294,10 +239,7 @@ export default function ProductTable() {
         </Table>
       </TableContainer>
 
-      <Dialog
-        open={deleteDialogOpen}
-        onClose={() => setDeleteDialogOpen(false)}
-      >
+      <Dialog open={deleteDialogOpen} onClose={() => setDeleteDialogOpen(false)} >
         <DialogTitle>Confirm Delete</DialogTitle>
         <DialogContent>
           <Typography>Are you sure you want to delete this product?</Typography>
@@ -310,22 +252,9 @@ export default function ProductTable() {
         </DialogActions>
       </Dialog>
 
-      <AddProductDialog
-        open={addOpen}
-        onClose={() => setAddOpen(false)}
-        onSubmit={handleAddSubmit}
-      />
+      <AddProductDialog open={addOpen} onClose={() => setAddOpen(false)} onSubmit={handleAddSubmit} />
       {selectedProduct && (
-        <EditProductDialog
-          open={open}
-          editedProduct={editedProduct}
-          selectedProductId={selectedProduct._id}
-          selectedImages={selectedImages}
-          onClose={() => setOpen(false)}
-          onInputChange={handleEditChange}
-          onImageChange={handleImageChange}
-          onSubmit={handleEditSubmit}
-        />
+        <EditProductDialog open={open} editedProduct={editedProduct} selectedProductId={selectedProduct._id} selectedImages={selectedImages} onClose={() => setOpen(false)} onInputChange={handleEditChange} onImageChange={handleImageChange} onSubmit={handleEditSubmit} />
       )}
     </Box>
   );
